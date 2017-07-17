@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit/Remove</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+
+</head>
+<body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+        var Comment = React.createClass({
+        edit:function()
+        {
+        alert("You clicked edit");
+        },
+        cancel:function()
+        {
+        alert("You clicked cancel");
+        },
+        render: function() {
+        return (
+        <div classname="commentContainer">
+            <div classname="commentText">Click below buttons</div>
+            <button onclick={this.edit} classname="button-primary">Edit</button>
+            <button onclick={this.cancel} classname="button-danger">Cancel</button>
+        </div>
+        );
+        }
+        });
+
+        ReactDOM.render(
+        <div classname="board">
+            <comment>hey there</comment>
+            <comment>hey there</comment>
+            <comment>hey there</comment>
+        </div>,
+        document.getElementById('container'));
+
+    </script>
+</body>
+</html>

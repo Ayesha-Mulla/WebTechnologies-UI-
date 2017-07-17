@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adding state to function/ refs(to identify value)</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+
+</head>
+<body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+        var Comment = React.createClass
+        ({
+        getInitialState: function()
+        {
+        return {editing: false}
+        },
+        edit:function()
+        {
+        this.setState({editing: true});
+        //alert("You clicked edit");
+        },
+        cancel:function()
+        {
+        alert("You clicked cancel");
+        },
+        save: function()
+        {
+        var val=this.refs.newText.value;
+        console.log("new comment : " +val);
+        this.setState({editing: false});
+        },
+        formEdit: function()
+        {
+        return (
+        <div classname="commentContainer">
+            <textarea ref="newText" defaultvalue={this.props.children}></textarea>
+            <button onclick={this.save} classname="button-success">Save</button>
+        </div>
+        );
+        },
+        ViewForm: function()
+        {
+        return (
+        <div classname="commentContainer">
+            <div classname="commentText">{this.props.children}</div>
+            <button onclick={this.edit} classname="button-primary">Edit</button>
+            <button onclick={this.cancel} classname="button-danger">Cancel</button>
+        </div>
+        );
+        },
+        render: function()
+        {
+        if(this.state.editing)
+        {
+        return this.formEdit();
+        }else
+        {
+        return this.ViewForm();
+        }
+        }
+        });
+
+
+        ReactDOM.render(
+        <div classname="board">
+            <comment>hey there</comment>
+            <comment>hey Ayesha</comment>
+            <comment>hey Blaahhh Blaah</comment>
+        </div>,
+        document.getElementById('container'));
+
+    </script>
+</body>
+</html>

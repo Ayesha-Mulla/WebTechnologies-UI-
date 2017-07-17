@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>multiple child components</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+
+</head>
+<body>
+    <div id="container"></div>
+
+    <script type="text/babel">
+        var Comment = React.createClass
+        ({
+        getInitialState: function()
+        {
+        return {editing: false}
+        },
+        edit:function()
+        {
+        this.setState({editing: true});
+
+        },
+        cancel:function()
+        {
+        this.props.removeComponent(this.props.index);
+        //alert("You clicked cancel");
+        },
+        save: function()
+        {
+        var val=this.refs.newText.value;
+        console.log("new comment : " +val);
+        this.props.updateComponent(val, this.props.index);
+        this.setState({editing: false});
+        },
+        formEdit: function()
+        {
+        return (
+        <div classname="commentContainer">
+            <textarea ref="newText" defaultvalue={this.props.children}></textarea>
+            <button onclick={this.save} classname="button-success">Save</button>
+        </div>
+        );
+        },
+        ViewForm: function()
+        {
+        return (
+        <div classname="commentContainer">
+            <div classname="commentText">{this.props.children}</div>
+            <button onclick={this.edit} classname="button-primary">Edit</button>
+            <button onclick={this.cancel} classname="button-danger">Cancel</button>
+        </div>
+        );
+        },
+        render: function()
+        {
+        if(this.state.editing)
+        {
+        return this.formEdit();
+        }else
+        {
+        return this.ViewForm();
+        }
+        }
+        });
+
+
+        var Board = React.createClass({
+        getInitialState: function() {
+        return {
+        comments: [
+        'Hello Ayesha',
+        'Hello Alice',
+        'Hello Jessy'
+        ]
+        }
+        },
+        eachComponent: function(text,i){
+        return (
+        <comment key={i} index={i} updatecomponent={this.updateComment} removecomponent={this.remoeveComment}>{text}</comment>);
+        },
+        remoeveComment : function(i){
+        console.log("removed text "+i);
+        var arr= this.state.comments;
+        arr.splice(i,1);
+        this.setState({comments: arr});
+        },
+        updateComment: function(newText,i){
+        console.log("edited text "+i);
+        var arr= this.state.comments;
+        arr[i] = newText;
+        this.setState({comments: arr});
+        },
+        render: function()
+        {
+        return (
+        <div classname="board">
+            {
+            this.state.comments.map(this.eachComponent)
+            }
+        </div>
+        );
+
+        }
+        });
+
+        ReactDOM.render(
+        <board />,
+        document.getElementById('container'));
+
+    </script>
+</body>
+</html>

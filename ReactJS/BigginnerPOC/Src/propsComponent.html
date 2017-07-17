@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sample</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+
+</head>
+<body>
+    <div id="example"></div>
+
+    <div id="container"></div>
+
+    <script type="text/babel">
+        const divStyle = {
+        display: 'inline', // note the capital 'W' here
+        color: 'white'
+        };
+        var BuckysComponent = React.createClass({
+        render: function() {
+        return (
+        <div>
+            <div>
+                <h2>Movie</h2>
+                <p>Actor</p>
+            </div><br />
+            <h1>{this.props.title}</h1>
+            <p>{this.props.actor}</p>
+        </div>
+
+        );
+        }
+        });
+        ReactDOM.render(
+        <div><buckyscomponent title="Abc" actor="aaa" /><buckyscomponent title="XYZ" actor="bbb" /><buckyscomponent title="PQR" actor="ccc" /></div>, document.getElementById('container'));
+
+    </script>
+</body>
+</html>

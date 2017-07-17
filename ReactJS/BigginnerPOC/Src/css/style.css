@@ -1,0 +1,16 @@
+.contanerDiv{
+background-color: orange;
+}
+.buttonComp
+{
+width: 90px;
+height: 90px;
+background-color: blue;
+}
+.parentDiv{
+  background-color: blue;
+}
+.board
+{
+  background-color: pink;
+}
